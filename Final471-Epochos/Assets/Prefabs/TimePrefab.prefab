@@ -43,9 +43,7 @@ GameObject:
   - component: {fileID: 5417634451215933966}
   - component: {fileID: 8487247395559944498}
   - component: {fileID: 4609159280142535314}
-  - component: {fileID: 272332212449326468}
   - component: {fileID: 1585979526}
-  - component: {fileID: 1585979527}
   - component: {fileID: 1807033652}
   - component: {fileID: 1807033650}
   - component: {fileID: 1807033651}
@@ -121,23 +119,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &272332212449326468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4981197398709576651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b178e751590a0e44844c4497bc43040, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isRewinding: 0
-  isPaused: 0
-  timePauseDuration: 5
-  countdownText: {fileID: 0}
-  rewindText: {fileID: 0}
 --- !u!65 &1585979526
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -151,23 +132,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0000001, z: 1.0000002}
   m_Center: {x: 0, y: -0.00000023841858, z: 0.0000009536743}
---- !u!114 &1585979527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4981197398709576651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b178e751590a0e44844c4497bc43040, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isRewinding: 0
-  isPaused: 0
-  timePauseDuration: 5
-  countdownText: {fileID: 0}
-  rewindText: {fileID: 0}
 --- !u!54 &1807033652
 Rigidbody:
   m_ObjectHideFlags: 0
