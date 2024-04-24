@@ -1,10 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
-namespace AstronautPlayer
-{
 
-    public class AstronautPlayer : MonoBehaviour {
+
+public class AstronautPlayer : MonoBehaviour {
 
         private Animator anim;
         private CharacterController controller;
@@ -18,17 +18,42 @@ namespace AstronautPlayer
 		public float jumpHeight = 3.0f;
         private bool isJumping = false;
         private float pushForce; 
+        public string sceneName;
+
 
         void Start () {
             controller = GetComponent <CharacterController>();
             anim = gameObject.GetComponentInChildren<Animator>();
         }
+        void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("projectile"))
+                {
+                    KillPlayer();
+                }
+        }
 
-        void Update (){
+        private void KillPlayer()
+        {
+            SceneManager.LoadScene(sceneName); 
+         
+        }
+
+   
+    
+
+        void Update () {
            
             if(controller.isGrounded){
               
-                moveDirection = transform.forward * Input.GetAxis("Vertical") * speed;
+                  float horizontalInput = Input.GetAxis("Horizontal");
+                float verticalInput = Input.GetAxis("Vertical");
+                Vector3 movement = new Vector3(horizontalInput, 0.0f, verticalInput);
+                movement = transform.TransformDirection(movement);
+                movement *= speed;
+
+             
+                moveDirection = movement;
 
                 if (Input.GetButtonDown("Jump")) {
                    
@@ -63,4 +88,6 @@ namespace AstronautPlayer
 
 
     }
-}
+
+    
+

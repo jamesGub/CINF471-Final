@@ -94,13 +94,18 @@ public class TimeRewind : MonoBehaviour
         if (!isPaused)
         {
             isPaused = true;
-            GameObject[] objects = GameObject.FindGameObjectsWithTag("Freezable"); 
-            foreach (GameObject obj in objects)  { 
-                Rigidbody objRb = obj.GetComponent<Rigidbody>(); 
-                if(objRb != null) { 
-                    objRb.isKinematic = isPaused;
+              GameObject[] freezableObjects = GameObject.FindGameObjectsWithTag("Freezable");
+            GameObject[] projectileObjects = GameObject.FindGameObjectsWithTag("projectile");
+
+            GameObject[] objects = new GameObject[freezableObjects.Length + projectileObjects.Length];
+            freezableObjects.CopyTo(objects, 0);
+            projectileObjects.CopyTo(objects, freezableObjects.Length);
+                foreach (GameObject obj in objects)  { 
+                    Rigidbody objRb = obj.GetComponent<Rigidbody>(); 
+                    if(objRb != null) { 
+                        objRb.isKinematic = isPaused;
+                    }
                 }
-            }
             if (isPaused) { 
                 timePauseTimer = timePauseDuration;
             }

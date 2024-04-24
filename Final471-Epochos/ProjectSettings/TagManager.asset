@@ -7,6 +7,12 @@ TagManager:
   - Freezable
   - PlayerEyes
   - Rock
+  - turret
+  - turret1
+  - projectile
+  - TeleporterA
+  - TeleporterB
+  - Teleporter
   layers:
   - Default
   - TransparentFX
