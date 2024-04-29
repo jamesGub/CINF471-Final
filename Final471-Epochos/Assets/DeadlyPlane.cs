@@ -6,7 +6,6 @@ public class DeadlyPlane : MonoBehaviour
     public string sceneName;
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the colliding object is the player
         if (other.CompareTag("Player"))
         {
             KillPlayer(other.gameObject);

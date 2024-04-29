@@ -7,8 +7,11 @@ using System.Collections;
 public class AstronautPlayer : MonoBehaviour {
 
         private Animator anim;
-        private CharacterController controller;
-
+        public Transform cam; 
+        public CharacterController controller;
+        public Rigidbody playerRigid;
+        public float turnSmoothTime = 0.1f;
+        float turnSmoothVelocity; 
         public float speed = 600.0f;
         public float turnSpeed = 400.0f;
         private Vector3 moveDirection = Vector3.zero;
@@ -39,20 +42,22 @@ public class AstronautPlayer : MonoBehaviour {
          
         }
 
-   
-    
-
         void Update () {
            
             if(controller.isGrounded){
               
-                  float horizontalInput = Input.GetAxis("Horizontal");
-                float verticalInput = Input.GetAxis("Vertical");
-                Vector3 movement = new Vector3(horizontalInput, 0.0f, verticalInput);
+                float horizontalInput = Input.GetAxisRaw("Horizontal");
+                float verticalInput = Input.GetAxisRaw("Vertical");
+                Vector3 movement = new Vector3(horizontalInput, 0.0f, verticalInput).normalized; 
+                if (movement.magnitude >= 0.1f) {
+                    float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg + cam.eulerAngles.y; 
+                    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime); 
+                    transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                    Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward; 
+                    //controller.Move(moveDir.normalized * speed * Time.deltaTime); 
+                }
                 movement = transform.TransformDirection(movement);
                 movement *= speed;
-
-             
                 moveDirection = movement;
 
                 if (Input.GetButtonDown("Jump")) {
@@ -62,15 +67,7 @@ public class AstronautPlayer : MonoBehaviour {
                     isJumping = true;
                 }
             }
-
-         
             moveDirection.y -= gravity * Time.deltaTime;
-
-           
-            float turn = Input.GetAxis("Horizontal");
-            transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
-
-           
             controller.Move(moveDirection * Time.deltaTime);
 
          
